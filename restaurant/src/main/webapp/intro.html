@@ -2,20 +2,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 페이지</title>
+<title>MatPlace</title>
+<link rel="stylesheet" href="core.css">
 </head>
 <body>
-<form method="post" action="main.jsp">
-조슐랭가이드<hr>
-
-
-ID:<input type="text" size="15" name="id"><br>
-PW:<input type="password" size="15" name="pw"><br>
-<input type="submit" value="로그인"><br>
-<a target="_blank" href="find_id.jsp">아이디찾기</a>
-<a target="_blank" href="find_pw.jsp">비밀번호찾기</a>
-<a target="_blank" href="member.jsp">회원가입하기</a>
-</form>
-
+<div class="page-hdr">
+   <a href="intro.html"><img src="https://i.ibb.co/BzVjzRx/reallogo.png" alt="reallogo" border="0" width="200" height="200"></a>
+</div>
+<div class="page-body" "text-align:center">
+   <h2 align="center">로그인</h2>
+   <div class="section pad-32">
+      <form method="post" action="login.jsp">
+      <input name="id" type="text" placeholder="ID" required>
+      <input name="pw" type="password" placeholder="PW">
+      <input type="submit" class="mtop-20" value="로그인">
+      </form>
+      <form method="post" action="member.html">
+      <input type="submit" class="mtop-20" value="회원가입">
+      </form>
+   
+   <br>
+   <div class="section pad-32 mbot-20">
+      <a href="find_id.jsp"><biv class="button">아이디⦁비밀번호 찾기</biv></a>
+   </div>
+</div>
 </body>
+<footer>
+    <p align="center">Copyright © 2023 KOREA_UNIVERSITY WEBPROJECT_11조</p>
+    <br><br>
+</footer>
 </html>
