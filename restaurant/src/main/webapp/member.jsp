@@ -7,6 +7,9 @@
 	String uid = request.getParameter("id");
 	String upass = request.getParameter("pw");
 	String uname = request.getParameter("name");
+	String uphone = request.getParameter("phone");
+	String uemail = request.getParameter("email");
+	String ubirth = request.getParameter("birthday");
 	
 	userDAO dao = new userDAO();
 	if (dao.exists(uid)) {
@@ -14,9 +17,9 @@
 		return;
 	}
 	
-	if (dao.insert(uid, upass, uname)){
+	if (dao.insert(uid, upass, uname,uphone,uemail,ubirth)){
 		session.setAttribute("id", uid);
-		response.sendRedirect("main.jsp");
+		response.sendRedirect("intro.html");
 	}
 	else{
 		out.print("회원가입 중 오류가 발생하였습니다.");
