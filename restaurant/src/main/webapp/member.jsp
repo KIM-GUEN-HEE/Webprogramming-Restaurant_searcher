@@ -13,7 +13,8 @@
 	
 	userDAO dao = new userDAO();
 	if (dao.exists(uid)) {
-		out.print("이미 가입한 회원입니다.");
+		out.println("<script>alert('이미 등록한 회원입니다.');</script>");
+		out.println("<script>location.href='member.html';</script>");
 		return;
 	}
 	
@@ -22,7 +23,8 @@
 		response.sendRedirect("intro.html");
 	}
 	else{
-		out.print("회원가입 중 오류가 발생하였습니다.");
+		out.println("<script>alert('회원가입 중 오류가 발생하였습니다.');</script>");
+		out.println("<script>location.href='member.html';</script>");
 	}
 
 %>

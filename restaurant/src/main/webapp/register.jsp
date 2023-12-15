@@ -11,8 +11,11 @@
 	
 	registerDao dao = new registerDao();
 	if (dao.exists(matname)) {
-		out.print("이미 등록된 가게입니다.");
+		
+		out.println("<script>alert('이미 등록된 가게입니다.');</script>");
+		out.println("<script>location.href='register.html';</script>");
 		return;
+		
 	}
 	
 	if (dao.insert(matname, matcategory, matlocation, pricerange)){
@@ -20,7 +23,8 @@
 		response.sendRedirect("main.html");
 	}
 	else{
-		out.print("등록 중 오류가 생겼습니다.");
+		out.println("<script>alert('등록 중 오류가 발생하였습니다.');</script>");
+		out.println("<script>location.href='register.html';</script>");
 	}
 
 %>
