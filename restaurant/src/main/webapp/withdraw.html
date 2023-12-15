@@ -21,6 +21,7 @@
   form {
 	display: inline;
 }
+
 </style>
 </head>
 <body>
@@ -50,15 +51,14 @@
       <div class="bg-white p-4 rounded-lg shadow-md mb-4">
         <input type="text" placeholder="맛플 검색" class="search-box form-input w-full rounded-md border-gray-300">
       </div>
-      <div class="bg-white p-4 rounded-lg shadow-md">
-			<h2 align = center style="font-size: 36pt" class="text-lg font-semibold mb-3">👑BEST맛집👑</h2>
-        <div id="newRestaurants" class="space-y-3">
-          <!-- Placeholder for new restaurant content -->
-          <div class="h-20 bg-gray-100 rounded-md"></div>
-          <div class="h-20 bg-gray-100 rounded-md"></div>
-          <div class="h-20 bg-gray-100 rounded-md"></div>
-        </div>
-	  </div>
+		<div class="bg-white p-4 rounded-lg shadow-md mb-4" style="height: 500px;">
+          <form method="post" action="withdraw.jsp">
+		      회원탈퇴하기<br><br>
+			  <input type="text" name="id" size="15" style="border: 3px solid #FCF0D2; border-radius: 5px;" placeholder="아이디를 입력하시오."><br><br>
+			  <input type="text" name="pw" size="15" style="border: 3px solid #FCF0D2; border-radius: 5px;" placeholder="패스워드를 입력하시오."><br><br>
+			  <button type="submit" id="logout" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">탈퇴하기</button>
+		  </form>
+		</div>
       </div>
       <div class="w-full md:w-1/4 p-2">
   		<div class="bg-white p-4 rounded-lg shadow-md mb-4">
@@ -92,6 +92,5 @@
 </body>
 <footer>
     <p align="center">Copyright © 2023 KOREA_UNIVERSITY WEBPROJECT_11조</p>
-    <br><br>
 </footer>
 </html>
