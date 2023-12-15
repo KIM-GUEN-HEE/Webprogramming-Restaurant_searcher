@@ -3,6 +3,6 @@
 <%
 	session.invalidate();
 	response.sendRedirect("intro.html");
-
+	
 
 %>
