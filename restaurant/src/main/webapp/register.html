@@ -48,12 +48,14 @@
     </div>
     <div class="w-full md:w-1/2 p-2">
       <div class="bg-white p-4 rounded-lg shadow-md mb-4">
-        <input type="search" placeholder="맛플 검색" class="search-box form-input w-full rounded-md border-gray-300">
+          <form method="get" action="search.jsp">
+          	<input type="search" name="search" placeholder="맛플 검색" class="search-box form-input w-full rounded-md border-gray-300">
+		  </form>
       </div>
       <div class="bg-white p-4 rounded-lg shadow-md mb-4" style="height: 500px;">
       맛집 등록 <br><br>
       <form method="get" action="register.jsp">
-      이름 :<input type="text" name="name" size="15" style="border: 3px solid #FCF0D2; border-radius: 5px;"><br><br>
+      이름 :<input type="text" name="name" size="15" style="border: 3px solid #FCF0D2; border-radius: 5px;" required><br><br>
       종류 :<select name="category" style="border: 3px solid #FCF0D2; border-radius: 5px;">
          <option value="Korean">한식</option>
          <option value="Japanese">일식</option>

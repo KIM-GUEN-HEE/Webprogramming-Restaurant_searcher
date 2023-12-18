@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import = "util.*" %>
+<%@ page import = "java.sql.*" %>
+<%@ page import = "dao.*" %>
+<%@ page import = "java.util.ArrayList" %>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -42,32 +48,43 @@
           <li class="menu-item p-2 rounded-md"><a href="rank.html" class="text-blue-600 hover:text-blue-800">맛집 랭킹</a></li>
           <li class="menu-item p-2 rounded-md"><a href="register.html" class="text-blue-600 hover:text-blue-800">맛집 등록</a></li>
           <li class="menu-item p-2 rounded-md"><a href="#" class="text-blue-600 hover:text-blue-800">My 맛플</a></li>
-          <li class="menu-item p-2 rounded-md"><a href="withdraw.html" class="text-blue-600 hover:text-blue-800">회원탈퇴</a></li>
+          <li class="menu-item p-2 rounded-md"><a href="withdraw.html" class="text-blue-600 hover:text-blue-800">회원 탈퇴</a></li>
         </ul>
       </div>
     </div>
     <div class="w-full md:w-1/2 p-2">
       <div class="bg-white p-4 rounded-lg shadow-md mb-4">
-          <form method="get" action="search.jsp">
-          	<input type="search" name="search" placeholder="맛플 검색" class="search-box form-input w-full rounded-md border-gray-300">
+		  <form method="get" action="search.jsp">
+        <input type="search" name="search" placeholder="맛플 검색" class="search-box form-input w-full rounded-md border-gray-300">
 		  </form>
       </div>
       <div class="bg-white p-4 rounded-lg shadow-md">
-        <ul class="space-y-3 mt-4">
-          <li class="menu-item p-2 rounded-md">맛집리스트</li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
+			<h2 align = center style="font-size: 36pt" class="text-lg font-semibold mb-3">검색 결과</h2>
+        <div id="newRestaurants" class="space-y-3">
+        
+          <!-- Placeholder for best restaurant content -->
           
-        </ul>
-      </div>
+          <%
+			ArrayList<matObj> searches = (new registerDao()).search(request.getParameter("search"));
+			
+			for(matObj search : searches){ 
+				String str = "";	
+				str += "이름: " + search.getName() + "/ 종류 : "+ search.getCategory() + "/ 위치 : "+ search.getLocation() + "/ 가격대 : " + search.getPricerange()+" 원"; %>
+			<div>
+    			<div  class="h-20 bg-gray-100 rounded-md"><br><%= str%></div>
+    			<form method="get" action="fovorite.jsp">
+    			<button type="submit" id="favorite" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">즐겨찾기</button>    				
+    			</form>
+    			<form method="get" action="likey.jsp">
+    			<button type="submit" id="likey" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">좋아요</button>    				
+    			</form>
+  			</div>
+			<%}%>
+          
+          
+          
+        </div>
+	  </div>
       </div>
       <div class="w-full md:w-1/4 p-2">
   		<div class="bg-white p-4 rounded-lg shadow-md mb-4">

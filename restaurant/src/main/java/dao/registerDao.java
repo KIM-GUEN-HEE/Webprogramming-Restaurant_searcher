@@ -1,13 +1,10 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.*;
 import javax.naming.NamingException;
+import util.*;
+import java.util.*;
 
-import util.ConnectionPool;
 
 public class registerDao {
 	
@@ -62,4 +59,30 @@ public class registerDao {
 		
 	}
 	
+	public ArrayList<matObj> search(String matname) throws NamingException, SQLException
+	{
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			String sql = "select * from matplace where name like ?";
+			conn = ConnectionPool.get();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, "%" + matname + "%");
+			rs = stmt.executeQuery();
+			
+			ArrayList<matObj> searches = new ArrayList<matObj>();
+			while(rs.next()) {
+				searches.add(new matObj(rs.getString("name"),rs.getString("category"),rs.getString("location"),rs.getString("pricerange")));
+			}
+			return searches;
+		}
+		finally
+		{
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			if(conn!=null) conn.close();
+		}
+	}
 }
