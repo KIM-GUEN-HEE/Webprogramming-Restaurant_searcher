@@ -85,4 +85,37 @@ public class registerDao {
 			if(conn!=null) conn.close();
 		}
 	}
+	
+	public ArrayList<matObj> array(String matname) throws NamingException, SQLException
+	{
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			String sql = "select * from matplace order by ts desc";
+			conn = ConnectionPool.get();
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			
+			ArrayList<matObj> recentlist = new ArrayList<matObj>();
+			while(rs.next()) {
+				recentlist.add(new matObj(rs.getString("name")));
+			}
+			return recentlist;
+		}
+		finally
+		{
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			if(conn!=null) conn.close();
+		}
+	}
+	
 }
+
+
+
+
+
+

@@ -19,6 +19,14 @@ public class matObj {
 		this.location = location;
 		this.pricerange = pricerange;
 	}
+	public matObj(String name) {
+		this.name = name;
+		
+	}
+	public matObj() {
+		
+	}
+	
 	public String getName() {return this.name;}
 	public String getCategory() {return this.category;}
 	public String getLocation() {return this.location;}

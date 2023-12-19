@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import = "util.*" %>
+<%@ page import = "java.sql.*" %>
+<%@ page import = "dao.*" %>
+<%@ page import = "java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,11 +29,11 @@
 }
 </style>
 </head>
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body>
 <div class="container mx-auto p-4">
   <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-1/4 p-2">
-      <a href="main.html"><img src="https://i.ibb.co/BzVjzRx/reallogo.png" alt="reallogo" border="0" width="150" height="150"></a>
+      <a href="main.jsp"><img src="https://i.ibb.co/BzVjzRx/reallogo.png" alt="reallogo" border="0" width="150" height="150"></a>
       <br>
       
       임건형 님 환영합니다.
@@ -38,11 +44,11 @@
       
       <div class="bg-white p-4 rounded-lg shadow-md">
         <ul class="space-y-3 mt-4">
-          <li class="menu-item p-2 rounded-md"><a href="#" class="text-blue-600 hover:text-blue-800">맛집 검색</a></li>
-          <li class="menu-item p-2 rounded-md"><a href="rank.html" class="text-blue-600 hover:text-blue-800">맛집 랭킹</a></li>
-          <li class="menu-item p-2 rounded-md"><a href="register.html" class="text-blue-600 hover:text-blue-800">맛집 등록</a></li>
+          <li class="menu-item p-2 rounded-md"><a href="main.jsp" class="text-blue-600 hover:text-blue-800">맛집 검색</a></li>
+          <li class="menu-item p-2 rounded-md"><a href="rank.jsp" class="text-blue-600 hover:text-blue-800">맛집 랭킹</a></li>
+          <li class="menu-item p-2 rounded-md"><a href="registerjsp.jsp" class="text-blue-600 hover:text-blue-800">맛집 등록</a></li>
           <li class="menu-item p-2 rounded-md"><a href="#" class="text-blue-600 hover:text-blue-800">My 맛플</a></li>
-          <li class="menu-item p-2 rounded-md"><a href="withdraw.html" class="text-blue-600 hover:text-blue-800">회원 탈퇴</a></li>
+          <li class="menu-item p-2 rounded-md"><a href="withdrawjsp.jsp" class="text-blue-600 hover:text-blue-800">회원 탈퇴</a></li>
         </ul>
       </div>
     </div>
@@ -106,9 +112,19 @@
         <h2 class="text-lg font-semibold mb-3">NEW! 맛집</h2>
         <div id="newRestaurants" class="space-y-3">
           <!-- Placeholder for new restaurant content -->
-          <div class="h-20 bg-gray-100 rounded-md"></div>
-          <div class="h-20 bg-gray-100 rounded-md"></div>
-          <div class="h-20 bg-gray-100 rounded-md"></div>
+           <%
+			ArrayList<matObj> recentlist = (new registerDao()).array(request.getParameter("search"));
+
+			for (int i = 0; i < Math.min(recentlist.size(), 3); i++) {
+    			matObj array = recentlist.get(i);
+    			String str2 = array.getName();
+			%>
+    			<div>
+        			<div align="center" class="h-20 bg-gray-100 rounded-md"><br><%= str2 %></div>
+    			</div>
+			<%
+			}
+			%>
         </div>
       </div>
     </div>
@@ -133,11 +149,6 @@ input.addEventListener('input', (e) => {
       recommendationBox.textContent = recommendations[randomIndex];
     });
   </script>
-<script>
-	function noBack() {
-    	window.history.forward();
-	}
-</script>
 </body>
 <footer>
     <p align="center">Copyright © 2023 KOREA_UNIVERSITY WEBPROJECT_11조</p>
