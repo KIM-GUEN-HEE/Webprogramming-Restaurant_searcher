@@ -6,6 +6,7 @@
 	
 	String uid = request.getParameter("id");
 	String upass = request.getParameter("pw");
+	String uname = request.getParameter("name");
 	
 	userDAO dao = new userDAO();
 	int code = dao.login(uid,upass);
@@ -19,7 +20,8 @@
 	}
 	else {
 		session.setAttribute("id", uid);
-		response.sendRedirect("main.html");
+		session.setMaxInactiveInterval(600);
+		response.sendRedirect("main.jsp");
 	}
 	
 	

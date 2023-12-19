@@ -20,7 +20,7 @@
 	
 	if (dao.insert(matname, matcategory, matlocation, pricerange)){
 		
-		response.sendRedirect("main.html");
+		response.sendRedirect("registerjsp.jsp");
 	}
 	else{
 		out.println("<script>alert('등록 중 오류가 발생하였습니다.');</script>");

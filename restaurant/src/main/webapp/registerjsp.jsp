@@ -36,7 +36,12 @@
       <a href="main.jsp"><img src="https://i.ibb.co/BzVjzRx/reallogo.png" alt="reallogo" border="0" width="150" height="150"></a>
       <br>
       
-      임건형 님 환영합니다.
+      	<%
+			String uname = (String)session.getAttribute("id");
+			out.print(uname);
+		%>
+      님 환영합니다.
+      
       <form method="post" action="logout.jsp">
        <button type="submit" id="logout" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">로그아웃</button>
       </form>
@@ -63,32 +68,32 @@
       <form method="get" action="register.jsp">
       이름 :<input type="text" name="name" size="15" style="border: 3px solid #FCF0D2; border-radius: 5px;" required><br><br>
       종류 :<select name="category" style="border: 3px solid #FCF0D2; border-radius: 5px;">
-         <option value="Korean">한식</option>
-         <option value="Japanese">일식</option>
-         <option value="Chinese">중식</option>
-         <option value="Western">양식</option>
-         <option value="Asian">아시안</option>
-         <option value="snackfood">분식</option>
-         <option value="Chicken">치킨</option>
-         <option value="Pizza">피자</option>
-         <option value="Fastfood">패스트푸드</option>
-         <option value="Cafe">카페/디저트</option>      
+         <option value="한식">한식</option>
+         <option value="일식">일식</option>
+         <option value="중식">중식</option>
+         <option value="양식">양식</option>
+         <option value="아시안">아시안</option>
+         <option value="분식">분식</option>
+         <option value="치킨">치킨</option>
+         <option value="피자">피자</option>
+         <option value="패스트푸드">패스트푸드</option>
+         <option value="카페/디저트">카페/디저트</option>      
       </select><br><br>
       위치 :<select name="location" style="border: 3px solid #FCF0D2; border-radius: 5px;">
-         <option value="Nam">남리</option>
-         <option value="Myeong">명리</option>
-         <option value="Jeong">정리</option>
-         <option value="Sang">상리</option>
-         <option value="Won">원리</option>
-         <option value="Pyeong">평리</option>
-         <option value="Kyo">교리</option>
-         <option value="Beonam">번암리</option>
-         <option value="Jungnim">죽림리</option>
-         <option value="Sinheung">신흥리</option>
-         <option value="Chimsan">침산리</option>
-         <option value="Seochang">서창리</option>
-         <option value="Sinan">신안리</option>
-         <option value="Bongsan">봉산리</option>         
+         <option value="남리">남리</option>
+         <option value="명리">명리</option>
+         <option value="정리">정리</option>
+         <option value="상리">상리</option>
+         <option value="원리">원리</option>
+         <option value="평리">평리</option>
+         <option value="교리">교리</option>
+         <option value="번암리">번암리</option>
+         <option value="죽림리">죽림리</option>
+         <option value="신흥리">신흥리</option>
+         <option value="침산리">침산리</option>
+         <option value="서창리">서창리</option>
+         <option value="신안리">신안리</option>
+         <option value="봉산리">봉산리</option>         
       </select><br><br>
       
        메뉴 가격대 : <input type="range" name="pricerange" value="10000" min="10000" max="100000" step="10000">
@@ -113,7 +118,7 @@
         <div id="newRestaurants" class="space-y-3">
           <!-- Placeholder for new restaurant content -->
            <%
-			ArrayList<matObj> recentlist = (new registerDao()).array(request.getParameter("search"));
+			ArrayList<matObj> recentlist = (new registerDao()).array();
 
 			for (int i = 0; i < Math.min(recentlist.size(), 3); i++) {
     			matObj array = recentlist.get(i);

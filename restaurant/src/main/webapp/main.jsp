@@ -4,9 +4,8 @@
 <%@ page import = "java.sql.*" %>
 <%@ page import = "dao.*" %>
 <%@ page import = "java.util.ArrayList" %>
-    
 
-    
+
     
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +38,12 @@
     <div class="w-full md:w-1/4 p-2">
 		<a href="main.jsp"><img src="https://i.ibb.co/BzVjzRx/reallogo.png" alt="reallogo" border="0" width="150" height="150"></a>
       <br>
+      	<%
+			String uname = (String)session.getAttribute("id");
+			out.print(uname);
+		%>
+      님 환영합니다.
       
-      임건형 님 환영합니다.
       <form method="post" action="logout.jsp">
        <button type="submit" id="logout" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">로그아웃</button>
       </form>
@@ -64,17 +67,18 @@
       </div>
       <div class="bg-white p-4 rounded-lg shadow-md">
         <ul class="space-y-3 mt-4">
-          <li class="menu-item p-2 rounded-md">맛집리스트</li>
+          <li align="center" class="menu-item p-2 rounded-md"><h2>맛집리스트</h3></li>
           <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
-          <li class="menu-item p-2 rounded-md"></li>
+          
+           <%
+			ArrayList<matObj> matlist = (new registerDao()).matlist();
+        	
+			
+			for(matObj mat_list : matlist){ 
+				String str3 = "";	
+				str3 += "이름: " + mat_list.getName() + "/ 종류 : "+ mat_list.getCategory() + "/ 위치 : "+ mat_list.getLocation() + "/ 가격대 : " + mat_list.getPricerange()+" 원"; %>
+			<li class="menu-item p-2 rounded-md"><a href="search.jsp"><%= str3 %></a></li>
+			<%}%>
           
         </ul>
       </div>
@@ -91,7 +95,7 @@
           <!-- Placeholder for new restaurant content -->
           
            <%
-			ArrayList<matObj> recentlist = (new registerDao()).array(request.getParameter("search"));
+			ArrayList<matObj> recentlist = (new registerDao()).array();
 
 			for (int i = 0; i < Math.min(recentlist.size(), 3); i++) {
     			matObj array = recentlist.get(i);

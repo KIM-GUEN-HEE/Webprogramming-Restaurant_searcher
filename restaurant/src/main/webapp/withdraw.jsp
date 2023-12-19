@@ -14,11 +14,11 @@ userDAO mydao = new userDAO();
 int code = mydao.login(uid,upw);
 if(code == 1){
 	out.println("<script>alert('아이디 또는 패스워드가 일치하지 않습니다.');</script>");
-	out.println("<script>location.href='withdraw.html';</script>");
+	out.println("<script>location.href='withdrawjsp.jsp';</script>");
 }
 else if (code == 2){
 	out.println("<script>alert('아이디 또는 패스워드가 일치하지 않습니다.');</script>");
-	out.println("<script>location.href='withdraw.html';</script>");
+	out.println("<script>location.href='withdrawjsp.jsp';</script>");
 }
 else if(code==0)
 {
@@ -29,7 +29,7 @@ else if(code==0)
 else
 {
 	out.println("<script>alert('회원탈퇴 중 오류가 발생했습니다.');</script>");
-	out.println("<script>location.href='withdraw.html';</script>");
+	out.println("<script>location.href='withdrawjsp.jsp';</script>");
 }
 %>
 

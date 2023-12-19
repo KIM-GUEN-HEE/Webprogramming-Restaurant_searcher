@@ -86,7 +86,7 @@ public class registerDao {
 		}
 	}
 	
-	public ArrayList<matObj> array(String matname) throws NamingException, SQLException
+	public ArrayList<matObj> array() throws NamingException, SQLException
 	{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -111,6 +111,33 @@ public class registerDao {
 			if(conn!=null) conn.close();
 		}
 	}
+	
+	public ArrayList<matObj> matlist() throws NamingException, SQLException
+	{
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			String sql = "select * from matplace";
+			conn = ConnectionPool.get();
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			
+			ArrayList<matObj> matlist = new ArrayList<matObj>();
+			while(rs.next()) {
+				matlist.add(new matObj(rs.getString("name"),rs.getString("category"),rs.getString("location"),rs.getString("pricerange")));
+			}
+			return matlist;
+		}
+		finally
+		{
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			if(conn!=null) conn.close();
+		}
+	}
+	
 	
 }
 

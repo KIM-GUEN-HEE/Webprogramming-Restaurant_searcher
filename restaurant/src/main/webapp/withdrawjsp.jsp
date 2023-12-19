@@ -40,7 +40,12 @@
 		<a href="main.jsp"><img src="https://i.ibb.co/BzVjzRx/reallogo.png" alt="reallogo" border="0" width="150" height="150"></a>
       <br>
       
-      임건형 님 환영합니다.
+      	<%
+			String uname = (String)session.getAttribute("id");
+			out.print(uname);
+		%>
+      님 환영합니다.
+      
       <form method="post" action="logout.jsp">
        <button type="submit" id="logout" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">로그아웃</button>
       </form>
@@ -82,7 +87,7 @@
         <div id="newRestaurants" class="space-y-3">
           <!-- Placeholder for new restaurant content -->
            <%
-			ArrayList<matObj> recentlist = (new registerDao()).array(request.getParameter("search"));
+			ArrayList<matObj> recentlist = (new registerDao()).array();
 
 			for (int i = 0; i < Math.min(recentlist.size(), 3); i++) {
     			matObj array = recentlist.get(i);
