@@ -30,6 +30,53 @@
   form {
 	display: inline;
 }
+h6 {
+  height: 100px;
+}
+
+h6 span {
+  position: relative;
+  top: 20px;
+  display: inline-block;
+  animation: bounce .3s ease infinite alternate;
+  font-family: 'Titan One', cursive;
+  font-size: 16px;
+  color: #red;
+  text-shadow: 0 1px 0 #CCC,
+               0 2px 0 #CCC,
+               0 3px 0 #CCC,
+               0 4px 0 #CCC,
+               0 5px 0 #CCC,
+               0 6px 0 transparent,
+               0 7px 0 transparent,
+               0 8px 0 transparent,
+               0 9px 0 transparent,
+               0 10px 10px rgba(0, 0, 0, .4);
+}
+
+h6 span:nth-child(2) { animation-delay: .1s; }
+h6 span:nth-child(3) { animation-delay: .2s; }
+h6 span:nth-child(4) { animation-delay: .3s; }
+h6 span:nth-child(5) { animation-delay: .4s; }
+h6 span:nth-child(6) { animation-delay: .5s; }
+h6 span:nth-child(7) { animation-delay: .6s; }
+h6 span:nth-child(8) { animation-delay: .7s; }
+
+@keyframes bounce {
+  100% {
+    top: -20px;
+    text-shadow: 0 1px 0 #CCC,
+                 0 2px 0 #CCC,
+                 0 3px 0 #CCC,
+                 0 4px 0 #CCC,
+                 0 5px 0 #CCC,
+                 0 6px 0 #CCC,
+                 0 7px 0 #CCC,
+                 0 8px 0 #CCC,
+                 0 9px 0 #CCC,
+                 0 50px 25px rgba(0, 0, 0, .2);
+  }
+}
 </style>
 </head>
 <body>
@@ -55,7 +102,7 @@
           <li class="menu-item p-2 rounded-md"><a href="rank.jsp" class="text-blue-600 hover:text-blue-800">맛집 랭킹</a></li>
           <li class="menu-item p-2 rounded-md"><a href="registerjsp.jsp" class="text-blue-600 hover:text-blue-800">맛집 등록</a></li>
           <li class="menu-item p-2 rounded-md"><a href="#" class="text-blue-600 hover:text-blue-800">My 맛플</a></li>
-          <li class="menu-item p-2 rounded-md"><a href="withdrawjsp.jsp" class="text-blue-600 hover:text-blue-800">회원탈퇴</a></li>
+          <li class="menu-item p-2 rounded-md"><a href="withdrawjsp.jsp" class="text-blue-600 hover:text-blue-800">회원 탈퇴</a></li>
         </ul>
       </div>
     </div>
@@ -67,7 +114,7 @@
       </div>
       <div class="bg-white p-4 rounded-lg shadow-md">
         <ul class="space-y-3 mt-4">
-          <li align="center" class="menu-item p-2 rounded-md"><h2>맛집리스트</h3></li>
+          <li align="center" class="menu-item p-2 rounded-md"><h3>맛집리스트</h3></li>
           <li class="menu-item p-2 rounded-md"></li>
           
            <%
@@ -77,7 +124,7 @@
 			for(matObj mat_list : matlist){ 
 				String str3 = "";	
 				str3 += "이름: " + mat_list.getName() + "/ 종류 : "+ mat_list.getCategory() + "/ 위치 : "+ mat_list.getLocation() + "/ 가격대 : " + mat_list.getPricerange()+" 원"; %>
-			<li class="menu-item p-2 rounded-md"><a href="search.jsp"><%= str3 %></a></li>
+			<li class="menu-item p-2 rounded-md"><a href="search.jsp?search=<%= mat_list.getName() %>"><%= str3 %></a></li>
 			<%}%>
           
         </ul>
@@ -85,9 +132,9 @@
       </div>
       <div class="w-full md:w-1/4 p-2">
   		<div class="bg-white p-4 rounded-lg shadow-md mb-4">
-    <h2 class="text-lg font-semibold mb-3">메뉴 추천!</h2>
-    <button id="recommendButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">오늘의 메뉴는?</button>
-    <div id="recommendation" class="mt-3 p-2 bg-gray-100 rounded-md"></div>
+    		<h2 class="text-lg font-semibold mb-3">메뉴 추천!</h2>
+    		<button id="recommendButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">오늘의 메뉴는?</button>
+    		<div id="recommendation" class="mt-3 p-2 bg-gray-100 rounded-md"></div>
         </div>
       <div class="bg-white p-4 rounded-lg shadow-md">
         <h2 class="text-lg font-semibold mb-3">NEW! 맛집</h2>
@@ -96,13 +143,13 @@
           
            <%
 			ArrayList<matObj> recentlist = (new registerDao()).array();
-
+        		  
 			for (int i = 0; i < Math.min(recentlist.size(), 3); i++) {
     			matObj array = recentlist.get(i);
     			String str2 = array.getName();
 			%>
     			<div>
-        			<div align="center" class="h-20 bg-gray-100 rounded-md"><br><%= str2 %></div>
+        			<div align="center" class="h-20 bg-gray-100 rounded-md"><a href="search.jsp?search=<%= array.getName() %>"><br><h6><span><%= str2 %></span></h6></a></div>
     			</div>
 			<%
 			}

@@ -20,7 +20,6 @@
 	}
 	else {
 		session.setAttribute("id", uid);
-		session.setMaxInactiveInterval(600);
 		response.sendRedirect("main.jsp");
 	}
 	
