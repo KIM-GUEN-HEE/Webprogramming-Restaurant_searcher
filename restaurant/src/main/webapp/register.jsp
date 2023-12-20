@@ -13,7 +13,7 @@
 	if (dao.exists(matname)) {
 		
 		out.println("<script>alert('이미 등록된 가게입니다.');</script>");
-		out.println("<script>location.href='register.html';</script>");
+		out.println("<script>location.href='registerjsp.jsp';</script>");
 		return;
 		
 	}
@@ -24,7 +24,7 @@
 	}
 	else{
 		out.println("<script>alert('등록 중 오류가 발생하였습니다.');</script>");
-		out.println("<script>location.href='register.html';</script>");
+		out.println("<script>location.href='registerjsp.jsp';</script>");
 	}
 
 %>

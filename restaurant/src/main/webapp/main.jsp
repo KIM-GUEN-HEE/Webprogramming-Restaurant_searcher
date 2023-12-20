@@ -41,7 +41,7 @@ h6 span {
   animation: bounce .3s ease infinite alternate;
   font-family: 'Titan One', cursive;
   font-size: 16px;
-  color: #red;
+  color: hotpink;
   text-shadow: 0 1px 0 #CCC,
                0 2px 0 #CCC,
                0 3px 0 #CCC,
@@ -124,7 +124,7 @@ h6 span:nth-child(8) { animation-delay: .7s; }
 			for(matObj mat_list : matlist){ 
 				String str3 = "";	
 				str3 += "이름: " + mat_list.getName() + "/ 종류 : "+ mat_list.getCategory() + "/ 위치 : "+ mat_list.getLocation() + "/ 가격대 : " + mat_list.getPricerange()+" 원"; %>
-			<li class="menu-item p-2 rounded-md"><a href="search.jsp?search=<%= mat_list.getName() %>"><%= str3 %></a></li>
+			<li  class="menu-item p-2 rounded-md"><a href="search.jsp?search=<%= mat_list.getName() %>"><%= str3 %></a></li>
 			<%}%>
           
         </ul>

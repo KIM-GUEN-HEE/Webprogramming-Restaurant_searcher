@@ -101,7 +101,76 @@ public class userDAO {
 		}
 	}
 	
-	
+	   public String findID(String uname, String uphone, String uemail, String ubirth) throws NamingException, SQLException {
+		      Connection conn = null;
+		      PreparedStatement stmt = null;
+		      ResultSet rs = null;
+		      String id = null;
+		      try {
+		         String sql = "select id from user where name=? and phone=? and email=? and birth=?";
+		         conn = ConnectionPool.get();
+		         stmt = conn.prepareStatement(sql);
+		         stmt.setString(1, uname);
+		         stmt.setString(2, uphone);
+		         stmt.setString(3, uemail);
+		         stmt.setString(4, ubirth);
+		         
+		         rs = stmt.executeQuery();
+		         if (rs.next())
+		            id = rs.getString(1);
+		         return id;
+		      }
+		      finally {
+		         if(stmt!=null) stmt.close();
+		         if(conn!=null) conn.close();
+		      }
+		   }
+	   public String findPW(String uid, String uname, String uphone, String uemail, String ubirth) throws NamingException, SQLException {
+		      Connection conn = null;
+		      PreparedStatement stmt = null;
+		      ResultSet rs = null;
+		      String pw = null;
+		      try {
+		         String sql = "select pw from user where id=? and name=? and phone=? and email=? and birth=?";
+		         conn = ConnectionPool.get();
+		         stmt = conn.prepareStatement(sql);
+		         stmt.setString(1, uid);
+		         stmt.setString(2, uname);
+		         stmt.setString(3, uphone);
+		         stmt.setString(4, uemail);
+		         stmt.setString(5, ubirth);
+		         
+		         rs = stmt.executeQuery();
+		         if (rs.next())
+		            pw = rs.getString(2);
+		         return pw;
+		      }
+		      finally {
+		         if(rs!=null) rs.close();
+		         if(stmt!=null) stmt.close();
+		         if(conn!=null) conn.close();
+		      }
+		   }
+		   
+		   public boolean updatePW(String uoldPass, String unewPass) throws NamingException, SQLException {
+		      Connection conn = null;
+		      PreparedStatement stmt = null;
+		      try {
+		         String sql = "update user set pw = ? where pw = ?";
+		         conn = ConnectionPool.get();
+		         stmt = conn.prepareStatement(sql);
+		         stmt.setString(2, uoldPass);
+		         stmt.setString(1, unewPass);
+		         
+		         int count = stmt.executeUpdate();
+		         return (count>0) ? true : false;
+		      }
+		      finally {
+		         if(stmt!=null) stmt.close();
+		         if(conn!=null) conn.close();
+		      }
+		   }
+
 	
 	
 }

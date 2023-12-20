@@ -137,7 +137,47 @@ public class registerDao {
 			if(conn!=null) conn.close();
 		}
 	}
-	
+	/*
+	public boolean addFavorite(String restaurantName) throws NamingException, SQLException
+	{
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = ConnectionPool.get(); // ConnectionPool 클래스는 실제 데이터베이스 연결을 관리하는 클래스로 가정합니다.
+
+            // 아래 SQL문은 가정일뿐, 실제 데이터베이스에 맞게 수정해야 합니다.
+            String sql = "INSERT INTO favorite (user_id, restaurant_id) VALUES (?, ?)";
+            stmt = conn.prepareStatement(sql);
+
+            // 사용자 아이디는 세션에서 가져오거나, 다른 방식으로 받아온다고 가정합니다.
+            String userId = session.setAttribute("id", uid);
+
+            stmt.setString(1, userId);
+            stmt.setString(2, restaurantName);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0; // 즐겨찾기 추가 성공 여부를 반환
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // 예외 발생 시 실패로 간주
+        } finally {
+            // 리소스 정리
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean addLike(String restaurantName)throws NamingException, SQLException
+    {
+        // addFavorite 메서드와 유사하게 구현
+        return// 좋아요 테이블에 사용자 아이디와 식당 이름을 추가하는 쿼리문을 실행
+    }
+	*/
 	
 }
 

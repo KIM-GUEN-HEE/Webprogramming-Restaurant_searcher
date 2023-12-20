@@ -114,21 +114,21 @@ h6 span:nth-child(8) { animation-delay: .7s; }
 			<h2 align = center style="font-size: 24pt" class="text-lg font-semibold mb-3">검색 결과</h2>
         <div id="searchedRestaurants" class="space-y-3">
         
-          <!-- Placeholder for searched restaurant content -->
+        <!-- Placeholder for searched restaurant content -->
           
           <%
 			ArrayList<matObj> searches = (new registerDao()).search(request.getParameter("search"));
         	
 			
 			for(matObj search : searches){ 
-				String str = "";	
+				String str = "";
 				str += "이름: " + search.getName() + "/ 종류 : "+ search.getCategory() + "/ 위치 : "+ search.getLocation() + "/ 가격대 : " + search.getPricerange()+" 원"; %>
 			<div>
     			<div  class="h-20 bg-gray-100 rounded-md"><br><%= str%></div>
-    			<form method="get" action="favorite.jsp">
+    			<form method="get" action="favorite.jsp?search=<%= search.getName() %>">
     			<button type="submit" id="favorite" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">즐겨찾기</button>    				
     			</form>
-    			<form method="get" action="likey.jsp">
+    			<form method="get" action="likey.jsp?search=<%= search.getName() %>">
     			<button type="submit" id="likey" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">좋아요</button>    				
     			</form>
   			</div>

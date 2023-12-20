@@ -116,8 +116,8 @@ h6 span:nth-child(8) { animation-delay: .7s; }
 		<div class="bg-white p-4 rounded-lg shadow-md mb-4" style="height: 500px;">
           <form method="post" action="withdraw.jsp">
 		      회원탈퇴하기<br><br>
-			  <input type="text" name="id" size="15" style="border: 3px solid #FCF0D2; border-radius: 5px;" placeholder="아이디를 입력하시오."><br><br>
-			  <input type="text" name="pw" size="15" style="border: 3px solid #FCF0D2; border-radius: 5px;" placeholder="패스워드를 입력하시오."><br><br>
+			  <input type="text" name="id" size="20" style="border: 3px solid #FCF0D2; border-radius: 5px;" placeholder="아이디를 입력하시오."><br><br>
+			  <input type="text" name="pw" size="20" style="border: 3px solid #FCF0D2; border-radius: 5px;" placeholder="패스워드를 입력하시오."><br><br>
 			  <button type="submit" id="logout" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">탈퇴하기</button>
 		  </form>
 		</div>
