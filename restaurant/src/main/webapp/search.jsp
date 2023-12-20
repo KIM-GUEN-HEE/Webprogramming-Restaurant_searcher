@@ -4,11 +4,15 @@
 <%@ page import = "java.sql.*" %>
 <%@ page import = "dao.*" %>
 <%@ page import = "java.util.ArrayList" %>
+<%@ page import = "dao.likeDAO" %>
 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.0/js/all.js"></script>
+
 <title>MatPlace</title>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/forms@0.3.4/dist/forms.min.js"></script>
@@ -25,7 +29,7 @@
     background-color: #e2e8f0; /* Light blue background for hover state */
   }
   form {
-	display: inline;
+   display: inline;
 }
 h6 {
   height: 100px;
@@ -74,19 +78,31 @@ h6 span:nth-child(8) { animation-delay: .7s; }
                  0 50px 25px rgba(0, 0, 0, .2);
   }
 }
+.heart {
+    cursor: pointer;
+  }
+  .heart:hover {
+    color: #FF3300;
+  }
+  .star {
+    cursor: pointer;
+  }
+  .star:hover {
+    color: #FAED7D;
+  }
 </style>
 </head>
 <body>
 <div class="container mx-auto p-4">
   <div class="flex flex-col md:flex-row">
     <div class="w-full md:w-1/4 p-2">
-		<a href="main.jsp"><img src="https://i.ibb.co/BzVjzRx/reallogo.png" alt="reallogo" border="0" width="150" height="150"></a>
+      <a href="main.jsp"><img src="https://i.ibb.co/BzVjzRx/reallogo.png" alt="reallogo" border="0" width="150" height="150"></a>
       <br>
       
-      	<%
-			String uname = (String)session.getAttribute("id");
-			out.print(uname);
-		%>
+         <%
+         String uname = (String)session.getAttribute("id");
+         out.print(uname);
+      %>
       님 환영합니다.
       
       <form method="post" action="logout.jsp">
@@ -106,41 +122,61 @@ h6 span:nth-child(8) { animation-delay: .7s; }
     </div>
     <div class="w-full md:w-1/2 p-2">
       <div class="bg-white p-4 rounded-lg shadow-md mb-4">
-		  <form method="get" action="search.jsp">
+        <form method="get" action="search.jsp">
         <input type="search" name="search" placeholder="맛플 검색" class="search-box form-input w-full rounded-md border-gray-300">
-		  </form>
+        </form>
       </div>
       <div class="bg-white p-4 rounded-lg shadow-md">
-			<h2 align = center style="font-size: 24pt" class="text-lg font-semibold mb-3">검색 결과</h2>
+         <h2 align = center style="font-size: 24pt" class="text-lg font-semibold mb-3">검색 결과</h2>
         <div id="searchedRestaurants" class="space-y-3">
         
         <!-- Placeholder for searched restaurant content -->
           
           <%
-			ArrayList<matObj> searches = (new registerDao()).search(request.getParameter("search"));
-        	
-			
-			for(matObj search : searches){ 
-				String str = "";
-				str += "이름: " + search.getName() + "/ 종류 : "+ search.getCategory() + "/ 위치 : "+ search.getLocation() + "/ 가격대 : " + search.getPricerange()+" 원"; %>
-			<div>
-    			<div  class="h-20 bg-gray-100 rounded-md"><br><%= str%></div>
-    			<form method="get" action="favorite.jsp?search=<%= search.getName() %>">
-    			<button type="submit" id="favorite" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">즐겨찾기</button>    				
-    			</form>
-    			<form method="get" action="likey.jsp?search=<%= search.getName() %>">
-    			<button type="submit" id="likey" class="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">좋아요</button>    				
-    			</form>
-  			</div>
-			<%}%>
+         ArrayList<matObj> searches = (new registerDao()).search(request.getParameter("search"));
+           likeDAO dao = new likeDAO();
+         
+         for(matObj search : searches){ 
+            int like_count = dao.likecount(search.getName());
+            
+            
+         	
+            
+            String str = "";
+            str += "이름: " + search.getName() + "/ 종류 : "+ search.getCategory() + "/ 위치 : "+ search.getLocation() + "/ 가격대 : " + search.getPricerange()+" 원"; %>
+         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col justify-between h-48">
+           <div class="flex justify-end"> <!-- 수정된 부분 -->
+             <div class="star text-black border-2 border-black rounded-full w-8 h-8 flex items-center justify-center" onclick="starclick(event)">
+               <i class="far fa-star fa-sm"></i> <!-- 수정된 부분 -->
+             </div>
+           </div>
+           <div class="flex justify-start"> <!-- 수정된 부분 -->
+             <div class="mb-4">
+               <p class="text-gray-700 text-base" name="<%= search.getName() %>"><%= str %></p>
+             </div>
+           </div>
+           <div class="flex items-center justify-end"> <!-- 수정된 부분 -->
+             <div class="flex items-center" onclick="likeclick(event)">
+               <span id="likeCounter" class="text-gray-700 mr-2"><%= like_count %></span>
+               <div class="heart text-black border-2 border-black rounded-full w-8 h-8 flex items-center justify-center">
+                 <i class="far fa-heart fa-sm"></i> <!-- 수정된 부분 -->
+                 <i class="fa-solid fa-heart red-heart" style="color: #ff0000;"></i>
+               </div>
+             </div>
+         </div>
+</div>
+
+         <%
+         
+         }%>
           
           
           
         </div>
-	  </div>
+     </div>
       </div>
       <div class="w-full md:w-1/4 p-2">
-  		<div class="bg-white p-4 rounded-lg shadow-md mb-4">
+        <div class="bg-white p-4 rounded-lg shadow-md mb-4">
     <h2 class="text-lg font-semibold mb-3">메뉴 추천!</h2>
     <button id="recommendButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">오늘의 메뉴는?</button>
     <div id="recommendation" class="mt-3 p-2 bg-gray-100 rounded-md"></div>
@@ -151,18 +187,18 @@ h6 span:nth-child(8) { animation-delay: .7s; }
           <!-- Placeholder for new restaurant content -->
           
           <%
-			ArrayList<matObj> recentlist = (new registerDao()).array();
+         ArrayList<matObj> recentlist = (new registerDao()).array();
 
-			for (int i = 0; i < Math.min(recentlist.size(), 3); i++) {
-    			matObj array = recentlist.get(i);
-    			String str2 = array.getName();
-			%>
-    			<div>
-        			<div align="center" class="h-20 bg-gray-100 rounded-md"><a href="search.jsp?search=<%= array.getName() %>"><br><h6><span><%= str2 %></span></h6></a></div>
-    			</div>
-			<%
-			}
-			%>
+         for (int i = 0; i < Math.min(recentlist.size(), 3); i++) {
+             matObj array = recentlist.get(i);
+             String str2 = array.getName();
+         %>
+             <div>
+                 <div align="center" class="h-20 bg-gray-100 rounded-md"><a href="search.jsp?search=<%= array.getName() %>"><br><h6><span><%= str2 %></span></h6></a></div>
+             </div>
+         <%
+         }
+         %>
           
           
           
@@ -182,6 +218,94 @@ h6 span:nth-child(8) { animation-delay: .7s; }
       recommendationBox.textContent = recommendations[randomIndex];
     });
   </script>
+  <script>
+  /*
+  document.querySelector('.heart').addEventListener('click', function() {
+    let likeCounter = document.getElementById('likeCounter');
+    if(this.classList.contains('far')) {
+      likeCounter.textContent = parseInt(likeCounter.textContent) - 1;
+    } else {
+      likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
+    }
+    this.classList.toggle('fas');
+    this.classList.toggle('far');
+    this.style.color = this.style.color === 'rgb(255, 51, 0)' ? 'black' : '#FF3300';
+  });
+
+  document.querySelector('.star').addEventListener('click', function() {
+    this.classList.toggle('fas');
+    this.classList.toggle('far');
+    this.style.color = this.style.color === 'rgb(250, 237, 125)' ? 'black' : '#FAED7D';
+  }); */
+  
+  
+  function likeclick(event) {
+     let restaurantName = event.currentTarget.closest('.bg-white').querySelector('[name]').getAttribute('name');
+     var xhr = new XMLHttpRequest();
+     var span = event.currentTarget.querySelector('span');
+
+     xhr.open('POST', './like.jsp', true);
+     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === XMLHttpRequest.DONE) {
+         if (xhr.status === 200) {
+           // Use the 'xhr.responseText' variable within this block
+           console.log('Data:', xhr.responseText);
+
+           // Your additional logic using 'xhr.responseText' goes here
+           if (xhr.responseText.trim() == 'delete') {
+             let like_count = span;
+             like_count.textContent = parseInt(like_count.textContent) - 1;
+           } else {
+             let like_count = span;
+             like_count.textContent = parseInt(like_count.textContent) + 1;
+           }
+         } else {
+           console.error('Error:', xhr.status);
+         }
+       }
+     };
+
+     // Send the request with the body data
+     xhr.send('name=' + restaurantName);
+   }
+
+  
+  function starclick(event){
+       event.target.style.color = "#FAED7D";
+       let restaurantName = event.currentTarget.closest('.bg-white').querySelector('[name]').getAttribute('name');
+       /*
+       var xhr = new XMLHttpRequest();
+       var span = event.currentTarget.querySelector('span');
+       
+       xhr.open('POST', './star.jsp', true);
+       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+       xhr.onreadystatechange = function () {
+         if (xhr.readyState === XMLHttpRequest.DONE) {
+           if (xhr.status === 200) {
+             // Use the 'xhr.responseText' variable within this block
+             console.log('Data:', xhr.responseText);
+
+             // Your additional logic using 'xhr.responseText' goes here
+             if (xhr.responseText.trim() == 'delete') {
+               let like_count = span;
+               like_count.textContent = parseInt(like_count.textContent) - 1;
+             } else {
+               let like_count = span;
+               like_count.textContent = parseInt(like_count.textContent) + 1;
+             }
+           } else {
+             console.error('Error:', xhr.status);
+           }
+         }
+       };
+       */
+       var xhr = new XMLHttpRequest();
+       
+       xhr.open('POST', './star.jsp', true);
+  }
+  
+</script>
 </body>
 <footer>
     <p align="center">Copyright © 2023 KOREA_UNIVERSITY WEBPROJECT_11조</p>

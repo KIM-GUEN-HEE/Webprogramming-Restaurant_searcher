@@ -142,7 +142,7 @@ public class userDAO {
 		         
 		         rs = stmt.executeQuery();
 		         if (rs.next())
-		            pw = rs.getString(2);
+		            pw = rs.getString(1);
 		         return pw;
 		      }
 		      finally {

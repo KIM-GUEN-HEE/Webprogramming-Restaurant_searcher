@@ -20,6 +20,7 @@
 	}
 	else {
 		session.setAttribute("id", uid);
+		//out.print(uid);
 		response.sendRedirect("main.jsp");
 	}
 	

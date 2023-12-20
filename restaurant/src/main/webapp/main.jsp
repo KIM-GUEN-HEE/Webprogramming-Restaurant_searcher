@@ -36,12 +36,12 @@ h6 {
 
 h6 span {
   position: relative;
-  top: 20px;
+  top: 10px;
   display: inline-block;
-  animation: bounce .3s ease infinite alternate;
-  font-family: 'Titan One', cursive;
-  font-size: 16px;
-  color: hotpink;
+  animation: bounce .5s ease infinite alternate;
+  font-family: 'Titan One', sans-serif;
+  font-size: 20px;
+  color: brown;
   text-shadow: 0 1px 0 #CCC,
                0 2px 0 #CCC,
                0 3px 0 #CCC,
@@ -64,7 +64,7 @@ h6 span:nth-child(8) { animation-delay: .7s; }
 
 @keyframes bounce {
   100% {
-    top: -20px;
+    top: -30px;
     text-shadow: 0 1px 0 #CCC,
                  0 2px 0 #CCC,
                  0 3px 0 #CCC,
@@ -149,7 +149,7 @@ h6 span:nth-child(8) { animation-delay: .7s; }
     			String str2 = array.getName();
 			%>
     			<div>
-        			<div align="center" class="h-20 bg-gray-100 rounded-md"><a href="search.jsp?search=<%= array.getName() %>"><br><h6><span><%= str2 %></span></h6></a></div>
+        			<div align="center" class="h-20 bg-gray-100 rounded-md"><a href="search.jsp?search=<%= array.getName() %>"><br><h2><span><%= str2 %></span></h2></a></div>
     			</div>
 			<%
 			}
